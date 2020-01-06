@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Playlist</title>
+
+	<script src="https://kit.fontawesome.com/6a207374e1.js" crossorigin="anonymous"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Kalam|Permanent+Marker&display=swap" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Kalam', cursive;
+			margin: 0px;
+			padding: 0px;
+			background: #363636;
+			background-size: cover;
+			min-height: 100vh;
+		}
+
+		h1, h2 {
+			margin-top: 0px;
+			font-family: 'Kalam', sans-serif;
+			letter-spacing: 3px;
+			color: #1DB954;
+		}
+
+		h1 {
+			font-family: 'Montserrat', sans-serif;
+			letter-spacing: 0px;
+			padding-bottom: 10px;
+			border-bottom: 1px solid white;
+			font-size: 50px;
+		}
+
+		h2 {
+			/*padding: 10px;*/
+
+		}
+
+		p {
+			font-family: 'Open Sans', sans-serif;
+		}
+
+		div {
+			text-align: center;
+		}
+
+		button {
+			border: 0px;
+			padding: 5px 10px;
+			font-size: 12px;
+			color: white;
+			cursor: pointer;
+			background: lightgreen;
+			color: black;
+			margin-bottom: 10px;
+		}
+
+		.content {
+			padding: 25px;
+			background: black;
+			width: 600px;
+			display: block;
+			margin: auto;
+			margin-top: 50px;
+			text-align: center;
+			color: #FAFAFA;
+			border-radius: 10px;
+			box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+		}
+
+		ul {
+			margin: auto;
+			list-style-position: inside;
+			list-style-image: none;
+			list-style-type: none;
+			
+		}
+		li {
+			text-align: left;
+			margin-bottom: 5px;
+		}
+		
+		input {
+			width: 60px;
+			margin-right: 3px;
+			background: #363636;
+			color: white;
+			padding: 4px;
+		}
+
+		i {
+			border-radius: 50%;
+			display: grid;
+			align-content: center;
+			align-items: center;
+			justify-content: center;
+			/*background: darkgray;*/
+
+			padding: 4px;
+			padding-left: 7px;
+			padding-top: 5px;
+			width: 28px;
+			height: 28px;
+
+			font-size: 12px;
+			border: 3px solid white;
+		}
+
+		i:hover {
+			background: white;
+			color: #1DB954;
+			border: 3px solid darkgray;
+			cursor: pointer;
+		}
+
+		.playlists {
+			background: #1DB954;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+
+			grid-gap: 3px;
+		}
+
+		.left, .right {
+			background: black;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="content">
+		<h1>Splatify</h1>
+		<p>append(<input type="text" name="appendList" id="appendList" placeholder="list">,<input type="text" name="appendItem" id="appendItem" placeholder="value">) <button id="appendButton">Append</button></p>
+		<p>remove(<input type="text" name="removeList" id="removeList" placeholder="list">,<input type="number" name="removeIndex" id="removeIndex" placeholder="index">) <button id="removeButton">Remove</button></p>
+		<p>insert(<input type="text" name="insertList" id="insertList" placeholder="list">,<input type="number" name="insertIndex" id="insertIndex" placeholder="index">,<input type="text" name="insertItem" id="insertItem" placeholder="value">) <button id="insertButton">Insert</button></p>
+		<div class="playlists">
+			<div class="left">
+				<h2>Playlist A:</h2>
+				<ul class="playlistAul">
+					<!-- Todos get inserted here with JavaScript -->
+				</ul>
+			</div>
+			<div class="right">
+				<h2>Playlist B:</h2>
+				<ul class="playlistBul">
+					<!-- Todos get inserted here with JavaScript -->
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/gh/CaryACTvF/toolbox@a244884/aptools.js"></script>
+
+	<script type="text/javascript">
+		let playlistA = ["Old Town Road", "Circles", "Someone You Loved"];
+		let playlistAul = document.querySelector(".playlistAul");
+
+		function displayPlaylist(playlist,list) {
+			playlist.innerHTML = "";
+			list.forEach((song) => {
+				playlist.innerHTML += `<li class="songA"><i class="fa fa-play fa"></i> ${song}</li>`;
+			})
+		}
+
+		let playlistB = ["Baby Shark", "Friday"];
+		let playlistBul = document.querySelector(".playlistBul");
+
+		window.addEventListener("load", function() {
+			displayPlaylist(playlistAul, playlistA);
+			displayPlaylist(playlistBul, playlistB);
+		})
+
+		let appendButton = document.querySelector("#appendButton");
+		let appendList = document.querySelector("#appendList");
+		let appendItem = document.querySelector("#appendItem");
+
+		appendButton.addEventListener("click",function() {
+			append(eval(appendList.value), appendItem.value)
+			displayPlaylist(playlistAul, playlistA);
+			displayPlaylist(playlistBul, playlistB);
+			appendList.value = "";
+			appendItem.value = "";
+		})
+
+		let removeButton = document.querySelector("#removeButton");
+		let removeList = document.querySelector("#removeList");
+		let removeIndex = document.querySelector("#removeIndex");
+
+		removeButton.addEventListener("click",function() {
+			remove(eval(removeList.value), removeIndex.value)
+			displayPlaylist(playlistAul, playlistA);
+			displayPlaylist(playlistBul, playlistB);
+			removeList.value = "";
+			removeIndex.value = "";
+		})
+
+		let insertButton = document.querySelector("#insertButton");
+		let insertList = document.querySelector("#insertList");
+		let insertItem = document.querySelector("#insertItem");
+		let insertIndex = document.querySelector("#insertIndex");
+
+		insertButton.addEventListener("click",function() {
+			insert(eval(insertList.value), insertIndex.value, insertItem.value)
+			displayPlaylist(playlistAul, playlistA);
+			displayPlaylist(playlistBul, playlistB);
+			insertList.value = "";
+			insertIndex.value = "";
+			insertItem.value = "";
+		})
+	</script>
+</body>
+</html>

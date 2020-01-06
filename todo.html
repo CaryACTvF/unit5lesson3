@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Kalam|Permanent+Marker&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Kalam', cursive;;
+			margin: 0px;
+			padding: 0px;
+			background: linear-gradient(135deg, darkblue, pink);
+			background-size: cover;
+			min-height: 100vh;
+		}
+
+		h1, h2 {
+			margin-top: 0px;
+			font-family: 'Permanent Marker', cursive;
+			letter-spacing: 3px;
+		}
+
+		div {
+			text-align: center;
+		}
+
+		button {
+			border: 0px;
+			padding: 5px 10px;
+			font-size: 12px;
+			color: white;
+			cursor: pointer;
+			background: gold;
+			color: black;
+			margin-bottom: 10px;
+		}
+
+		.content {
+			padding: 25px;
+			background: #252525;
+			width: 400px;
+			display: block;
+			margin: auto;
+			margin-top: 50px;
+			text-align: center;
+			color: #FAFAFA;
+			border-radius: 10px;
+			border: 2px solid gold;
+			box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+		}
+
+		ul {
+			width: 300px;
+			margin: auto;
+			list-style-position: inside;
+			list-style-image: none;
+			list-style-type: none;
+			
+		}
+		li {
+			text-align: left;
+
+		}
+
+	</style>
+</head>
+<body>
+	<div class="content">
+		<h1>Todo List ✏️</h1>
+		<p>New Todo: <input type="text" name="newtodo" id="newtodo"> <button id="addTodoButton">Append Todo</button></p>
+		<p>Remove Todo: <input type="number" name="removeLocation" id="removeLocation"> <button id="removeTodoButton">Remove Todo</button></p>
+		<ul class="todoList">
+			<!-- Todos get inserted here with JavaScript -->
+		</ul>
+	</div>
+
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/gh/CaryACTvF/toolbox@a244884/aptools.js"></script>
+
+	<script type="text/javascript">
+		let todos = ["Go Shopping", "Walk Dog", "Refill Metrocard"];
+		let todoList = document.querySelector(".todoList");
+
+		function displayTodos(todos) {
+			todoList.innerHTML = "";
+			todos.forEach((todo) => {
+				todoList.innerHTML += `<li class="todo">&#x2713; ${todo}</li>`;
+			})
+		}
+
+		window.addEventListener("load", function() {
+			displayTodos(todos);
+		})
+
+		let addTodoButton = document.querySelector("#addTodoButton");
+		let newtodo = document.querySelector("#newtodo");
+
+		addTodoButton.addEventListener("click", function() {
+			append(todos, newtodo.value)
+			displayTodos(todos)
+		})
+
+		let removeTodoButton = document.querySelector("#removeTodoButton");
+		let removeLocation = document.querySelector("#removeLocation");
+
+		removeTodoButton.addEventListener("click", function() {
+			remove(todos, removeLocation.value)
+			displayTodos(todos)
+		})
+	</script>
+</body>
+</html>

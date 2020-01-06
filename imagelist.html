@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image List</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Kalam|Permanent+Marker&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: sans-serif;
+			margin: 0px;
+			padding: 0px;
+			background: linear-gradient(135deg, blue, white);
+			background-size: cover;
+			min-height: 100vh;
+		}
+
+		h1, h2 {
+			margin-top: 0px;
+			font-family: 'Permanent Marker', cursive;
+			letter-spacing: 3px;
+		}
+
+		div {
+			text-align: center;
+		}
+
+		button {
+			border: 0px;
+			padding: 5px 10px;
+			font-size: 12px;
+			color: white;
+			cursor: pointer;
+			background: darkorange;
+			color: black;
+			margin-bottom: 10px;
+		}
+
+		.content {
+			padding: 25px;
+			background: #252525;
+			width: 600px;
+			display: block;
+			margin: auto;
+			margin-top: 50px;
+			text-align: center;
+			color: #FAFAFA;
+			border-radius: 10px;
+			border: 2px solid darkorange;
+			box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+		}
+
+		ul {
+			width: 300px;
+			margin: auto;
+			list-style-position: inside;
+			list-style-image: none;
+			list-style-type: none;
+			
+		}
+		li {
+			text-align: left;
+
+		}
+		
+		img {
+			width: 400px;
+		}
+
+		input {
+			margin-left: 2px;
+			margin-right: 2px;
+			width: 3em;
+		}
+	</style>
+</head>
+<body>
+	<div class="content">
+		<h1>Image List</h1>
+		<p>The following list of images has been stored:</p>
+		<p>images = [Dog, Cat, Bear, Squirrel, Lizard]</p>
+		<p>image[<input type="number" name="imageToDisplay" id="imageToDisplay">] <button id="showImageButton">Show Image</button></p>
+		<img src="" alt="">
+	</div>
+
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/gh/CaryACTvF/toolbox@a244884/aptools.js"></script>
+
+	<script type="text/javascript">
+		let images = [
+			"https://pbs.twimg.com/profile_images/962170088941019136/lgpCD8X4_400x400.jpg",
+			"https://ae01.alicdn.com/kf/HTB17OOXnLuSBuNkHFqDq6xfhVXaN.jpg",
+			"https://www.denverzoo.org/wp-content/uploads/2018/09/Grizzly-Bear_Thumb.jpg",
+			"https://scientistseessquirrel.files.wordpress.com/2019/04/squirrel-yvonne-findlay-40mrswummin-1-attributed.jpg?w=624",
+			"https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/reptiles/f/frilled-lizard_thumb.JPG"
+
+		];
+		
+		let image = document.querySelector("img");
+
+		let showImageButton = document.querySelector("#showImageButton");
+		let imageToDisplay = document.querySelector("#imageToDisplay");
+
+		showImageButton.addEventListener("click", function() {
+			image.src = images[imageToDisplay.value - 1]
+		})
+	</script>
+</body>
+</html>
